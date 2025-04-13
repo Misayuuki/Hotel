@@ -6,7 +6,7 @@ $stmt = $pdo->prepare("SELECT * FROM fasilitas_kamar WHERE id = :id");
 $stmt->execute(['id' => $id]);
 $data = $stmt->fetch();
 
-// kalau data tidak ditemukan
+
 if (!$data) {
     echo "Data tidak ditemukan!";
     exit;
