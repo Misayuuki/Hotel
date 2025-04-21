@@ -3,6 +3,7 @@ include "../lib/koneksi.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_kamar = $_POST['namakamar'];
+    $harga = $_POST['harga']; 
     $deskripsi = $_POST['deskripsi'];
     $total_kamar = $_POST['tokamar'];
     $detail_kamar = $_POST['detail_kamar'];
@@ -13,10 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     if (move_uploaded_file($_FILES['gbr']['tmp_name'], $target_file)) {
-        $sql = "INSERT INTO tb_kamar (nama_kamar, deskripsi, total_kamar, detail_kamar, kapasitas, gambar) VALUES (:nama_kamar, :deskripsi, :total_kamar, :detail_kamar, :kapasitas, :gambar)";
+        $sql = "INSERT INTO tb_kamar (nama_kamar, harga, deskripsi, total_kamar, detail_kamar, kapasitas, gambar) VALUES (:nama_kamar, :harga, :deskripsi, :total_kamar, :detail_kamar, :kapasitas, :gambar)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'nama_kamar' => $nama_kamar,
+            'harga' => $harga,
             'deskripsi' => $deskripsi,
             'total_kamar' => $total_kamar,
             'detail_kamar' => $detail_kamar,
@@ -86,6 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     style="border-color: black;">
                             </div>
                             <div class="mb-3">
+                                <label for="harga" class="form-label">Harga Kamar : </label>
+                                <input type="number" class="form-control" id="harga" name="harga"
+                                    style="border-color: black;">
+                            </div>
+                            <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi : </label>
                                 <input type="text" class="form-control" id="deskripsi" name="deskripsi"
                                     style="border-color: black;">
@@ -98,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="mb-3">
                                 <label for="detail_kamar" class="form-label">Detail Kamar :</label>
                                 <input type="text" class="form-control" id="detail_kamar" name="detail_kamar"
-                                style="border-color: black;"> 
+                                    style="border-color: black;">
                             </div>
                             <div class="mb-3">
                                 <label for="kapasitas" class="form-label">Kapasitas :</label>

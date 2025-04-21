@@ -134,11 +134,12 @@ if (!$reservasi) {
         <table>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>No. Resv</th>
                     <th>Kamar</th>
                     <th>Check-in</th>
                     <th>Check-out</th>
                     <th>Jumlah Kamar</th>
+                    <th>Total Harga</th>
                 </tr>
             </thead>
             <tbody>
@@ -148,6 +149,7 @@ if (!$reservasi) {
                     <td><?= $reservasi['checkin'] ?></td>
                     <td><?= $reservasi['checkout'] ?></td>
                     <td><?= $reservasi['jml_kamar'] ?></td>
+                    <td>Rp<?= number_format( $reservasi['total_harga']);?></td>
                 </tr>
             </tbody>
         </table>

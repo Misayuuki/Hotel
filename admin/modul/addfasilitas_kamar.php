@@ -74,16 +74,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             ?>
                             <div class="mb-3">
                                 <label for="id_kamar" class="form-label">Kamar :</label>
-                                <select class="form-control" id="id_kamar" name="id_kamar" required style="border-color: black;">
+                                <select class="form-control" id="id_kamar" name="id_kamar" required
+                                    style="border-color: black;">
                                     <option value="">Pilih Kamar</option>
                                     <?php foreach ($kamars as $kamar): ?>
-                                        <option value="<?= $kamar['id_kamar'] ?>"><?= $kamar['nama_kamar'] ?></option>
+                                    <option value="<?= $kamar['id_kamar'] ?>"><?= $kamar['nama_kamar'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                            <?php
+                                // Ambil data tipe_fasilitas dari database
+                                $stmt = $pdo->query("SELECT * FROM tipe_fasilitas");
+                                $tipeFasilitasList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                ?>
                             <div class="mb-3">
                                 <label for="fasilitas" class="form-label">Fasilitas :</label>
-                                <input type="text" class="form-control" id="fasilitas" name="fasilitas" style="border-color: black;">
+                                <select class="form-control" id="fasilitas" name="fasilitas" required
+                                    style="border-color: black;">
+                                    <option value="">Pilih Fasilitas</option>
+                                    <?php foreach ($tipeFasilitasList as $tf): ?>
+                                    <option value="<?= htmlspecialchars($tf['tipe_fasilitas']) ?>">
+                                        <?= htmlspecialchars($tf['tipe_fasilitas']) ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="my-4">
                                 <button type="submit" name="btn" class="btn btn-primary">Input Data</button>
