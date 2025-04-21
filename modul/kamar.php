@@ -119,8 +119,8 @@ $data_kamar = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 <?=$kamar['detail_kamar']?>
                                             </p>
                                             <p>
-                                                <strong style="color:#c9a66b;">Harga Per Malam / Hari : </strong> Rp.
-                                                500.000++
+                                                <strong style="color:#c9a66b;">Harga Per Malam / Hari : </strong> 
+                                                Rp<?= number_format( $kamar['harga']);?>
                                             </p>
                                             <figcaption class="blockquote-footer mt-0">
                                                 <i>Harga dapat bervariasi berdasarkan jenis kamar. Hubungi resepsionis

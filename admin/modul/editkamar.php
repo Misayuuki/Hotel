@@ -14,6 +14,7 @@ if (!$data) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_kamar = $_POST['namakamar'];
+    $harga = $_POST['harga'];
     $deskripsi = $_POST['deskripsi'];
     $total_kamar = $_POST['tokamar'];
     $detail_kamar = $_POST['detail_kamar'];
@@ -36,9 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Update data 
-    $stmt = $pdo->prepare("UPDATE tb_kamar SET nama_kamar = :nama_kamar, deskripsi = :deskripsi, total_kamar = :total_kamar,  detail_kamar = :detail_kamar, kapasitas = :kapasitas,  gambar = :gambar WHERE id_kamar = :id_kamar");
+    $stmt = $pdo->prepare("UPDATE tb_kamar SET nama_kamar = :nama_kamar, harga = :harga, deskripsi = :deskripsi, total_kamar = :total_kamar,  detail_kamar = :detail_kamar, kapasitas = :kapasitas,  gambar = :gambar WHERE id_kamar = :id_kamar");
     $stmt->execute([
         'nama_kamar' => $nama_kamar,
+        'harga' => $harga,
         'deskripsi' => $deskripsi,
         'total_kamar' => $total_kamar,
         'detail_kamar' => $detail_kamar,
@@ -110,6 +112,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     style="border-color: black;" value="<?php echo $data['nama_kamar']; ?>">
                             </div>
                             <div class="mb-3">
+                                <label for="harga" class="form-label">Harga Kamar : </label>
+                                <input type="number" class="form-control" id="harga" name="harga"
+                                    style="border-color: black;" value="<?php echo $data['harga']; ?>">
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi : </label>
                                 <input type="text" class="form-control" id="deskripsi" name="deskripsi"
                                     style="border-color: black;" value="<?php echo $data['deskripsi']; ?>">
@@ -122,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="mb-3">
                                 <label for="detail_kamar" class="form-label">Detail Kamar :</label>
                                 <input type="text" class="form-control" id="detail_kamar" name="detail_kamar"
-                                    style="border-color: black;" value="<?php echo $data['detail_kamar']; ?>"> 
+                                    style="border-color: black;" value="<?php echo $data['detail_kamar']; ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="kapasitas" class="form-label">Kapasitas :</label>

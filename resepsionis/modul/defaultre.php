@@ -1,9 +1,8 @@
 <?php 
 include "../lib/koneksi.php";
 
-
 $tanggal = isset($_GET['tanggal']) ? $_GET['tanggal'] : '';
-$nama = isset($_GET['nama']) ? $_GET['nama'] : '';
+$kode = isset($_GET['kode']) ? $_GET['kode'] : '';
 
 $sql = "SELECT * FROM reservasi_pelanggan WHERE 1=1";
 $params = [];
@@ -13,9 +12,9 @@ if (!empty($tanggal)) {
     $params[':checkin'] = $tanggal;
 }
 
-if (!empty($nama)) {
-    $sql .= " AND nama_tamu LIKE :nama";
-    $params[':nama'] = "%$nama%";
+if (!empty($kode)) {
+    $sql .= " AND id = :id";
+    $params[':id'] = $kode;
 }
 
 $sql .= " ORDER BY id DESC";
@@ -86,9 +85,10 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         style="border: 1px solid #c9a66b;">
                 </div>
                 <div class="col-auto">
-                    <input type="text" name="nama" class="form-control" placeholder="Cari nama tamu"
-                        value="<?= $nama ?>" style="border: 1px solid #c9a66b;">
+                    <input type="text" name="kode" class="form-control" placeholder="Cari kode reservasi"
+                        value="<?= $kode ?>" style="border: 1px solid #c9a66b;">
                 </div>
+
 
 
                 <div class="col-auto">
@@ -112,6 +112,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <table class="table">
                         <thead style="font-family: 'Baskervville', serif;">
                             <tr>
+                                <th>Kode Reservasi</th>
                                 <th>Status</th>
                                 <th>Nama Tamu</th>
                                 <th>Check In</th>
@@ -126,7 +127,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <?php foreach ($data as $rowResult): ?>
                             <tr>
-
+                                <td><?=$rowResult['id']?></td>
                                 <td><?=$rowResult['status']?></td>
                                 <td><?=$rowResult['nama_tamu']?></td>
                                 <td><?=$rowResult['checkin']?></td>

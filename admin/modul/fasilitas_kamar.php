@@ -64,6 +64,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <header>
                 <p style="font-family: 'Baskervville', serif;">
                     <a class="btn btn-outline-success btn-sm" href="?page=addfasilitas_kamar">Tambah</a>
+                    <a class="btn btn-outline-success btn-sm" href="?page=addtipefasilitas">Tipe Fasilitas</a>
                     <span class="icon"><i class="bi bi-people-fill me-2 mx-4"></i></span>
                     Data Fasilitas Kamar
                 </p>

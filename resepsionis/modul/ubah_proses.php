@@ -13,14 +13,31 @@ if (!$data) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $status = $_POST['status'];
+    $statusBaru = $_POST['status'];
+    $statusLama = $data['status'];
 
+    // Update status
     $sql = "UPDATE reservasi_pelanggan SET status = :status WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        'status' => $status,
+        'status' => $statusBaru,
         'id' => $id
     ]);
+
+    // Cek jika status sebelumnya belum mengembalikan stok
+    if (
+        ($statusBaru === 'selesai check out' || $statusBaru === 'dibatalkan') &&
+        !in_array($statusLama, ['selesai check out', 'dibatalkan']) // baru lakukan jika belum
+    ) {
+        $jumlah_kamar = $data['jml_kamar'];
+        $id_kamar = $data['id_kamar'];
+
+        $updateKamar = $pdo->prepare("UPDATE tb_kamar SET total_kamar = total_kamar + :jumlah WHERE id_kamar = :id_kamar");
+        $updateKamar->execute([
+            ':jumlah' => $jumlah_kamar,
+            ':id_kamar' => $id_kamar
+        ]);
+    }
 
     echo "<script type='text/javascript'>
         alert('Data Proses berhasil diupdate! 🤩');

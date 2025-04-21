@@ -13,7 +13,7 @@ $stmt->execute([$id_reservasi]);
 $reservasi = $stmt->fetch();
 
 if (!$reservasi) {
-    echo "<script>alert('Reservasi tidak ditemukan!'); window.location.href='index.php';</script>";
+    echo "<script>alert('Reservasi tidak ditemukan!'); window.location.href='dashboard_resepsionis.php';</script>";
     exit();
 }
 
@@ -105,6 +105,10 @@ if (!$reservasi) {
                                 <tr>
                                     <td>Jumlah Kamar</td>
                                     <td><?= $reservasi['jml_kamar'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Harga</td>
+                                    <td>Rp<?= number_format( $reservasi['total_harga']);?></td>
                                 </tr>
                                 <tr>
                                     <td>Status</td>

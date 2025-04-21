@@ -78,6 +78,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th>No</th>
                                 <th>Nama Kamar</th>
+                                <th>Harga</th>
                                 <th>Deskripsi</th>
                                 <th>Total Kamar</th>
                                 <th>Detail Kamar</th>
@@ -93,6 +94,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <td><?=$no++?></td>
                                 <td><?=$rowResult['nama_kamar']?></td>
+                                <td>Rp<?= number_format($rowResult['harga']);?></td>
                                 <td><?=$rowResult['deskripsi']?></td>
                                 <td><?=$rowResult['total_kamar']?></td>
                                 <td><?=$rowResult['detail_kamar']?></td>
